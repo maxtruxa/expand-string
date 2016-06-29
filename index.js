@@ -30,10 +30,10 @@ function isLowSurrogate(codeUnit) {
 // - index points inside a surrogate pair (invalid argument)
 function charAt(str, index) {
   if (typeof str !== 'string') {
-    throw TypeError('`str` must be a string');
+    throw new TypeError('`str` must be a string');
   }
   if (typeof index !== 'number') {
-    throw TypeError('`index` must be a number');
+    throw new TypeError('`index` must be a number');
   }
 
   const codeUnit = str.charCodeAt(index);
@@ -43,16 +43,16 @@ function charAt(str, index) {
 
   if (isLowSurrogate(codeUnit)) {
     if (index > 0 && isHighSurrogate(str.charCodeAt(index - 1))) {
-      throw RangeError('Index points inside a surrogate pair');
+      throw new RangeError('Index points inside a surrogate pair');
     } else {
-      throw RangeError('Invalid UTF-16: lone low surrogate encountered');
+      throw new RangeError('Invalid UTF-16: lone low surrogate encountered');
     }
   }
 
   if (isHighSurrogate(codeUnit)) {
     const codeUnit2 = str.charCodeAt(index + 1);
     if (Number.isNaN(codeUnit2) || !isLowSurrogate(codeUnit2)) {
-      throw RangeError('Invalid UTF-16: lone high surrogate encountered');
+      throw new RangeError('Invalid UTF-16: lone high surrogate encountered');
     }
     return String.fromCharCode(codeUnit, codeUnit2);
   }
@@ -134,7 +134,7 @@ function expandString(str, options) {
   const ellipsis = options.ellipsis;
 
   let output = [];
-  for (let i = 0; i < str.length; ) {
+  for (let i = 0; i < str.length;) {
     // get current character and move i to next index
     let ch = charAt(str, i);
     i += ch.length;

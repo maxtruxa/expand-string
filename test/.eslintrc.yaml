@@ -9,4 +9,5 @@ globals:
 rules:
   no-process-env: 'off'
   valid-jsdoc: 'off'
+  max-len: 'off'
 
