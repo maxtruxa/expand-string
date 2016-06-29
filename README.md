@@ -42,7 +42,7 @@ Expands all ranges found in a string.
   The string to expand.
 - `[options]` *object*, *string* (default = `{}`)
   
-  - `[ellipsis]` *string* (default = `-`)
+  - `[ellipsis]` *string* (default = `'-'`)
     
     The ellipsis used to indicated a range.
   
