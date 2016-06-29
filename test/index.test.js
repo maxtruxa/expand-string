@@ -1,6 +1,5 @@
 'use strict';
 
-const util = require('util');
 const expect = require('expect.js');
 const expandString = require('..');
 const charAt = expandString.charAt;
