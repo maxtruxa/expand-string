@@ -11,11 +11,16 @@ Range based string expansion.
 ```js
 const expandString = require('expand-string');
 
-var expanded = expandString('a-f0-9_-');
-// => 'abcdef0123456789_-'
+let expanded = expandString('a-f9-0_-');
+// => 'abcdef9876543210_-'
+
+const generateRange = expandString.generateRange;
+
+let range = generateRange('s', 'z');
+// => 'stuvwxyz'
 ```
 
-## Installing
+## Installation
 
 ```bash
 npm install expand-string
@@ -23,39 +28,103 @@ npm install expand-string
 
 ## Features
 
-- Expand any character range.
+- Expand arbitrary character ranges.
 - Specify ranges using any ellipsis (default is `'-'`).
 - Full Unicode support.
 
-## Usage
-
-Just `require` the package to get the `expandString` function and apply it to any string.
-
-```
-expandString(str, options);
-```
-
-Expands all ranges found in a string.
-
-- `str` *string* (default = `''`)
-  
-  The string to expand.
-- `[options]` *object*, *string* (default = `{}`)
-  
-  - `[ellipsis]` *string* (default = `'-'`)
-    
-    The ellipsis used to indicated a range.
-  
-  If `options` is a *string* it's treated as ellipsis.
+## API
 
 ```js
 const expandString = require('expand-string');
+const generateRange = expandString.generateRange;
+```
 
+### expandString(str, options)
+
+Expands all ranges found in a string.
+
+#### str
+
+*string* (default = `''`)
+
+The string to expand. If `str` is *undefined* or *null* an empty result is
+returned (`''` or `[]`, depending on `options.returnArray`).
+
+#### options
+
+*object*, *string* (default = `{}`)
+
+`expandString` accepts these properties in the options object:
+
+*Note: If `options` is a string it's treated as ellipsis.*
+
+##### ellipsis
+
+*string* (default = `'-'`)
+
+The ellipsis used to indicated a range.
+
+```js
 expandString('ac-f9-5_-');
 // => 'acdef98765_-'
 
-expandString('z..u', '..'); // or {ellipsis: '..'}
+expandString('z..u', {ellipsis: '..'});
 // => 'zyxwvu'
+
+expandString('z..u', '..'); // shortcut
+// => 'zyxwvu'
+```
+
+##### returnArray
+
+*boolean* (default = `false`)
+
+If `false` the return value is a *string*. If `true` the return value is an
+*Array* with one Unicode character per element.
+
+```js
+expandString('a-f');
+// => 'abcdef'
+
+expandString('a-f', {returnArray: true});
+// => ['a', 'b', 'c', 'd', 'e', 'f']
+```
+
+### generateRange(begin, end, options)
+
+Generates a range from `begin` to `end`.
+
+#### begin
+
+*string* (single character)
+
+The begin of the range (inclusive).
+
+#### end
+
+*string* (single character)
+
+The end of the range (inclusive).
+
+#### options
+
+*object* (default = `{}`)
+
+`generateRange` accepts these properties in the options object:
+
+##### returnArray
+
+*boolean* (default = `false`)
+
+If `false` the return value is a *string*. If `true` the return value is an
+*Array* with one Unicode character per element.
+
+```js
+generateRange('a', 'f');
+// => 'abcdef'
+
+generateRange('a', 'f', {returnArray: true});
+// => ['a', 'b', 'c', 'd', 'e', 'f']
 ```
 
 ## Tests
