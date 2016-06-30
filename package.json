@@ -26,9 +26,9 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "test": "mocha --opts test/mocha.opts test/*.test.js",
-    "test-ci": "istanbul cover _mocha --report lcovonly -- --opts test/mocha.opts test/*.test.js",
-    "coverage": "istanbul cover _mocha -- --reporter dot --opts test/mocha.opts test/*.test.js",
+    "test": "mocha --opts test/mocha.opts",
+    "test-ci": "istanbul cover _mocha --report lcovonly -- --opts test/mocha.opts",
+    "coverage": "istanbul cover _mocha -- --reporter dot --opts test/mocha.opts",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "files": [
