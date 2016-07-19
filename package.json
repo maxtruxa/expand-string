@@ -1,6 +1,6 @@
 {
   "name": "expand-string",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Range based string expansion",
   "author": "Max Truxa <dev@maxtruxa.com> (http://maxtruxa.com/)",
   "main": "index.js",
@@ -37,6 +37,7 @@
     "index.js",
     ".eslintrc.yaml",
     "examples/",
+    "lib/",
     "test/"
   ],
   "keywords": [
